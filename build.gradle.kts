@@ -35,3 +35,25 @@ tasks.withType<KotlinCompile> {
 
 
 // TODO: your code starts here
+tasks.register<Exec>("npmInstall") {
+    workingDir = file("ui")
+    commandLine("npm", "i")
+}
+
+tasks.register<Exec>("compileUi") {
+    workingDir = file("ui")
+    commandLine("npm", "run", "build")
+    dependsOn("npmInstall")
+}
+
+tasks.register<Copy>("copyUi") {
+    from("ui/dist") {
+        include("index.html", "app.js", "css/**")
+    }
+    into("src/main/resources/static")
+    dependsOn("compileUi")
+}
+
+tasks.named("bootRun") {
+    dependsOn("copyUi")
+}
