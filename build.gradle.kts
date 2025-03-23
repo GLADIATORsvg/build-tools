@@ -57,3 +57,6 @@ tasks.register<Copy>("copyUi") {
 tasks.named("bootRun") {
     dependsOn("copyUi")
 }
+tasks.named<ProcessResources>("processResources") {
+    dependsOn("copyUi")
+}
