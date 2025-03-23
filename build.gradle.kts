@@ -50,7 +50,7 @@ tasks.register<Copy>("copyUi") {
     from("ui/dist") {
         include("index.html", "app.js", "css/**")
     }
-    into("src/main/resources/static")
+    into("src/main/resources")
     dependsOn("compileUi")
 }
 
